@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Form</title>
+    <script>
+        function validateForm() {
+            const name = document.forms["feedbackForm"]["name"].value;
+            const email = document.forms["feedbackForm"]["email"].value;
+            const age = document.forms["feedbackForm"]["age"].value;
+            const feedback = document.forms["feedbackForm"]["feedback"].value;
+
+            if (!name || !email || !age || !feedback) {
+                alert("All fields must be filled out");
+                return false;
+            }
+
+            if (!email.includes("@")) {
+                alert("Invalid email address");
+                return false;
+            }
+
+            const ageNum = Number(age);
+            if (isNaN(ageNum) || ageNum < 10 || ageNum > 100) {
+                alert("Age must be between 10 and 100");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+    <style>
+        body { font-family: Arial; background: #f0f0f0; padding: 20px; }
+        form { background: #fff; padding: 20px; border-radius: 8px; }
+        input, textarea { display: block; margin-bottom: 10px; width: 100%; }
+    </style>
+</head>
+<body>
+    <h2>Feedback Form</h2>
+    <form name="feedbackForm" action="/submit" method="POST" onsubmit="return validateForm()">
+        <input type="text" name="name" placeholder="Your name">
+        <input type="email" name="email" placeholder="Your email">
+        <input type="number" name="age" placeholder="Your age">
+        <textarea name="feedback" placeholder="Your feedback"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
